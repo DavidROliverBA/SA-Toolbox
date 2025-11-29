@@ -1,0 +1,131 @@
+Software Architecture bases on set of basic principles that is actual for every kind of software system. Experienced Software Architects are aware of them and able to spot the right places in their software products to implement specific principle. Let us have a quick overview over some basic principles that Software Architects deals with on daily basis:
+
+_**1.Dependency Inversion…**_This principle states that direction of dependency should be towards abstraction not implementation. If compile-time dependency flows in direction of run-time execution this makes directed dependency. With Dependency Inversion we invert the direction of dependency control. Take a look at my following article for deeper understanding: [How to apply SOLID Software Design Principles to Spring Boot Application (Part 5)](https://medium.com/p/de6abf20e423)
+
+
+_**2.Separation of Concerns…**_This principle states that a software system should be separated by the kind of work it does. For Example: It is noteworthy to separate the software system into different pieces by business logic, infrastructure or user interface. By splitting the system into different parts based on different activity areas makes it easier to develop/test/deploy. SoC is a driving force behind Software Architecture Patterns like [Domain Driven Design](23a9999e-13c5-4e06-bf49-8ce76e8ab082), Hexagonal Architecture, Clean Architecture.
+
+***3.Inversion of Control…***
+
+This principle is similar to Dependency Inversion Principle but in broader context. IoC inverts the flow of control which is managed by different third party frameworks such as [Spring Framework](db11caf4-9cc0-4d2c-b6d7-38c5d655756f). Unlike traditional [Java](800e520e-3e6a-42ee-95b9-361896f7555d) EE programs where Beans are initialized procedurally by the engineer that developed it, Spring takes control of Configuration Beans, which means inverting the control.
+
+***4.Dependency Injection…***
+
+
+This Principle states that for example in java terms: dependency should be injected through constructor in run-time. Action Interface is injected in Human class through its HumanAction Implementation, that decides in run-time which specific action to implement. This technique gives some flexibility of dependencies:
+
+***5.Single Responsibility…***
+
+This principle's main idea is to limit each building block of a software system by one and only responsibility. No matter what is the scope of a building block, be it plugin, package, class, function even a variable. Each of these building blocks should have only one responsibility. Take a look at my other article for deeper understanding: [How to apply SOLID Software Design Principles to Spring Boot Application (Part 1)](https://medium.com/p/6b886f6d943e)
+
+***6.Don't Repeat Yourself (DRY)…***
+
+This principle aims to eliminate redundancy in code by avoiding duplicate code. If there is existing functionality for some behaviour this should be repeatedly used, instead of having same code snippet in multiple instances.
+
+
+> Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.
+
+***7.Open-Closed…***
+
+> *A Software artifact should be open for extension but closed for modification.*
+
+This simple description of the principle was firstly introduced by Bertrand Meyer. Software system that needs modification each time for any additional functionality is just a big mess. On the other hand, this kind of chaotic program is welcoming occasional bugs every time modification is made. Preferably, every new functionality should be maximum of new code and minimum of change in old code, in ideal world: zero changes in old code.
+
+***8.Persistence Ignorance…***
+
+
+PI bases on the idea that code should be unaffected by whichever database or persistence technology is chosen. Business Logic should be free of any technology chosen to be applied. If tomorrow, there is better alternative persistence technology which is more effective and for better price, changing this part of software system should not affect upper abstraction layers.
+
+***9.YAGNI…***
+
+You ain't gonna need it. This principle tries to avoid premature optimization of a software system. Often developers overengineer some things in a software system with the vision that some time in future it will be helpful. But this time often never comes.
+
+***10.Boy Scout Rule…***
+
+> Always leave the campground cleaner than you found it.
+
+The main idea here is to always keep refactoring code as you encounter anti-patterns while developing further. This leads to better code quality over time.
+
+***11.Liskov-Subsititution…***
+
+
+> *If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T, the behaviour of P is unchanged when o1 is substituted for o2 then S is a subtype of T.*
+
+This definition from Barbara Liskov might sound pretty confusing but in essence, it is a simple and easy to understand principle. If we restate the above given definition, the principle's motto is: when using inheritance, hierarchy of inheritance should be from functional and business logic aspect consistent. The subtypes should be mutually substitutable and not alter behavior of parent class. As a simple example we can take *"infamous square/rectangle"* problem. Where square should not be subtype of rectangle, because definition of height and length of these two geometric forms are different (square's height and weight are equal whereas for rectangle they will vary).
+
+***12.Encapsulation…***
+
+
+Different building blocks of a Software System should make use of Encapsulation by restricting access to its components from outside world. This achieved by setting components private in a class scope or setting access restrictions in plugin scope (in terms of [java](800e520e-3e6a-42ee-95b9-361896f7555d)) so hiding information.
+
+***13.Loose Coupling…***
+
+One of the most important principles in Software Architecture is Loose Coupling which means simply put loose dependencies. This principle states that software systems should be loosely dependent on each other. If one part of software systems changes, this should influence other parts minimally. Loose Coupling is possible through Dependency Inversion, Asynchronous Messaging Middleware, Event Sourcing etc. Take a look at my following article, if you want to get deeper view in different forms of coupling in software engineering: [9 Forms of Coupling in Software Architecture](https://medium.com/p/4d5cf2b3e99e)
+
+***14. Cohesion…***
+
+
+> Cohesion refers to the degree to which the elements inside a module belong together. In one sense, it is a measure of the strength of relationship between the methods and data of a class and some unifying purpose or concept served by that class.
+
+It is a best practice to have highly cohesive classes, which motivates single responsibility principle, loose coupling etc.
+
+***15. Interface Segregation…***
+
+> ***Interface-Segregation Principle*** *states that no client should be forced to depend on methods it does not use.*
+
+We should make it clear that, this principle is applicable mostly to statically-typed programming languages like [Java](800e520e-3e6a-42ee-95b9-361896f7555d), C etc. In dynamically typed languages like Python or Ruby this principle does not make a big sense.
+
+
+We can imagine a situation that our Income and Expense Use Cases are dependent on a functionality that holds business logic for both cases. So Income Use Case has an abundant dependency on a functionality that is used for Expense Use Case and Expense Use Case has the same issue in respect to Income Use Case. Following is the Violation of ISP based on above discussion:
+
+***16. Bounded Context…***
+
+> Bounded contexts are a central pattern in [Domain-Driven Design](23a9999e-13c5-4e06-bf49-8ce76e8ab082). They provide a way of tackling complexity in large applications or organizations by breaking it up into separate conceptual modules. Each conceptual module then represents a context that is separated from other contexts (hence, bounded), and can evolve independently. Each bounded context should ideally be free to choose its own names for concepts within it, and should have exclusive access to its own persistence store. [[1]](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles)
+
+***17.Stable Dependencies…***
+
+
+This principle states that different building blocks of a software system should only depend on artifacts that reliable, stable. This principle makes more sense in [docker](711e7e7b-5221-4c1f-8f71-dd3c2a6fcf3a) image terms, where you import different dependencies from docker hub without even knowing how reliable/stable are they.
+
+***18. Polymorphism…***
+
+This actually belongs to 4 Pillars of Object Oriented Programming and motivates usage of interfaces (in [java](800e520e-3e6a-42ee-95b9-361896f7555d) terms!) which can be provisioned in multiple forms. Polymorphism means: entity with multiple forms.
+
+***19. Modularization…***
+
+Modularization is the process of dividing a software system into multiple independent modules where each module works independently. This principle is another form of single responsibility separation of concerns principles applied to the static structure of a software system.
+
+***20. Abstraction…*** This also belongs to 4 Pillars of Object Oriented Programming and states:
+
+
+> The process of removing physical, spatial, or temporal details or attributes in the study of objects or systems to focus attention on details of greater importance; it is similar in nature to the process of generalization;
+
+***21. Keep It Simple, Stupid (KISS)…***
+
+As it is understandable from the above statement this principle motivates software engineers to keep the code simple and stupid(understandable) to avoid potential future misunderstandings from other peer engineers.
+
+***22. Incremental/Iterative Approach…***
+
+This principle is basics of Agile Software Development Manifesto, that bases on the idea that software system should be developed on incremental and iterative manner. That means with every iteration software system is incremented and gone live.
+
+***23. Least Knowledge…***
+
+Or information envying is another term to encapsulation or information hiding principles which states that different parts of software system should only have knowledge that they need.
+
+
+If you are interested in more Software Architecture topics take a look at my other articles.
+
+***Relevant Articles:***
+
+1. [Managing Architecture Debt with Dependency Structure Matrix](https://medium.com/p/51f63b6efb4c)
+
+2. [Hexagonal Architecture Pattern with Spring Boot example](https://azeynalli1990.medium.com/hexagonal-architecture-pattern-with-spring-boot-example-d6a26b466ecc)
+
+3. [5 Software Design Patterns implemented in Spring](https://azeynalli1990.medium.com/5-software-design-patterns-implemented-in-spring-88356dac738d)
+
+4. [Cloud-Native Architecture Patterns (Part 1)](https://azeynalli1990.medium.com/cloud-native-architecture-patterns-60a010d90978)
+
+5. [Cloud-Native Architecture Patterns (Part 2)](https://azeynalli1990.medium.com/cloud-native-architecture-patterns-part-2-9704f160525f)
+
+P.S. You can connect with me on [twitter](https://twitter.com/zeynalli1990) or [linkedin](https://www.linkedin.com/in/ali-zeynalli-27590933/).
+
